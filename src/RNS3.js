@@ -6,6 +6,7 @@ import { Request } from './Request'
 import { S3Policy } from './S3Policy'
 
 const AWS_DEFAULT_S3_HOST = 's3.amazonaws.com'
+const AWS_ACCELERATE_HOST = 's3-accelerate.amazonaws.com'
 
 const EXPECTED_RESPONSE_KEY_VALUE_RE = {
   key: /<Key>(.*)<\/Key>/,
@@ -38,7 +39,7 @@ export class RNS3 {
       contentType: file.type
     }
 
-    const url = `https://${options.bucket}.${options.awsUrl || AWS_DEFAULT_S3_HOST}`
+    const url = `https://${options.bucket}.${options.accelerate ? AWS_ACCELERATE_HOST : AWS_DEFAULT_S3_HOST}`
     const method = "POST"
     const policy = S3Policy.generate(options)
 
